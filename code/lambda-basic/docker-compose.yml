@@ -1,0 +1,11 @@
+version: '3'
+
+services:
+  nodejs:
+    image: node:8.10-alpine
+    ports:
+      - 9080:80
+    volumes:
+      - ./:/app
+    working_dir: /app
+    command: npm run debug

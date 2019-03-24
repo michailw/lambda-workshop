@@ -1,0 +1,59 @@
+stages:
+  - Fetch
+  - Test
+  - Build
+  - Deploy
+
+image: node:8.10-alpine
+
+Fetch dependencies:
+  stage: Fetch
+  script:
+    - npm ci
+  artifacts:
+    paths:
+      - node_modules
+
+Lint:
+  script:
+    - npm run lint
+  dependencies:
+    - Fetch dependencies
+
+Test:
+  script:
+    - npm test
+  dependencies:
+    - Fetch dependencies
+
+Audit:
+  stage: Test
+  script:
+    - npm audit
+  dependencies: []
+
+Build:
+  stage: Build
+  script:
+    - tsc
+    - npm prune --production
+    - mv node_modules dist/
+  dependencies:
+    - Fetch dependencies
+  artifacts:
+    paths:
+      - dist
+  only:
+    - master
+
+Deploy:
+  stage: Deploy
+  image: eoconverse/awscli
+  script:
+    - cd dist
+    - zip -r lambdaFunction.zip *
+    - aws lambda update-function-code --function-name ${LAMBDA_FUNCTION} --zip-file fileb://lambdaFunction.zip
+  dependencies:
+    - Build
+  only:
+    - master

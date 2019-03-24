@@ -1,0 +1,25 @@
+{
+  "name": "converse-support-app",
+  "version": "1.0.0",
+  "description": "Supports maintenance of Converse",
+  "main": "src/server.js",
+  "scripts": {
+    "debug": "nodemon",
+    "test": "mocha -r ts-node/register tests/**/*.spec.ts",
+    "lint": "tslint -c tslint.json --project ."
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "aws-sdk": "^2.386.0",
+    "es6-promise": "^4.2.5"
+  },
+  "devDependencies": {
+    "@types/core-js": "^0.9.39",
+    "@types/es6-promise": "^3.3.0",
+    "@types/node": "^8.9.4",
+    "ts-node": "^7.0.1",
+    "tslint": "^5.12.1",
+    "typescript": "^3.2.2"
+  }
+}
