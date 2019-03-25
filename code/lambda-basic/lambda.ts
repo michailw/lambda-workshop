@@ -34,7 +34,11 @@ export const handler = async (
 	context: any = {},
 	callback: any = () => {}
 ): Promise<any> => {
-	let { path, httpMethod, queryStringParameters, body } = event;
+	let { path, httpMethod, queryStringParameters, body, resource } = event;
+	path = path.replace(resource, "");
+	if (path.charAt(0) !== "/") {
+		path = "/" + path;
+	}
 
 	let response = {
 		body: JSON.stringify({
