@@ -3,6 +3,5 @@
 node_modules
 jspm_packages
 typings
-*.js
 dist
 .serverless
