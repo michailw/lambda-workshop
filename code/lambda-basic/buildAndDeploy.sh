@@ -2,7 +2,7 @@
 
 LAMBDA_FUNCTION="$1"
 
-tsc
+./node_modules/.bin/tsc
 npm prune --production
 cp -r node_modules dist/
 pushd dist

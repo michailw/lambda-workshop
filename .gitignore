@@ -3,5 +3,4 @@
 node_modules
 jspm_packages
 typings
-dist
 .serverless
