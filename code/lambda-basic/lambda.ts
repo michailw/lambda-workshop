@@ -35,6 +35,7 @@ export const handler = async (
 	callback: any = () => {}
 ): Promise<any> => {
 	let { path, httpMethod, queryStringParameters, body, resource } = event;
+	resource = resource.replace("{proxy+}", "");
 	path = path.replace(resource, "");
 	if (path.charAt(0) !== "/") {
 		path = "/" + path;
